@@ -8,17 +8,17 @@ import java.io.File;
 
 @Service
 public class CampagneServiceImpl implements CampagneService {
-    private final CampagneService campagneService;
+    private final CampaignClientService campagneService;
     private final IExportService exportService ;
 
-    public CampagneServiceImpl(CampagneService campagneService, IExportService exportService) {
+    public CampagneServiceImpl(CampaignClientService campagneService, IExportService exportService) {
         this.campagneService = campagneService;
         this.exportService = exportService;
     }
 
     @Override
     public void createCampagne(Campaign campaign) {
-        campagneService.createCampagne(campaign);
+        campagneService.createCampaign(campaign);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class CampagneServiceImpl implements CampagneService {
     public void exportCampaign(String campaignId) {
         Campaign campaign = campagneService.getCampaign(campaignId);
         Survey survey = campagneService.getSurvey(campaign.getSurveyId());
-        File export = exportService.export(campaign, survey);
+        exportService.export(campaign, survey);
 
     }
 }
